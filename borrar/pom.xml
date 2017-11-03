@@ -7,6 +7,12 @@
 	<name>Project ${project.artifactId}</name>
 	<description>Description for ${project.artifactId} ...</description>
 
+<!-- 
+Improvements: 
+1. Use encrypted passwords in settings.xml file:
+	https://maven.apache.org/guides/mini/guide-encryption.html
+	https://stackoverflow.com/questions/11418268/decrypting-server-entries-in-custom-maven-plugin
+ -->
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
