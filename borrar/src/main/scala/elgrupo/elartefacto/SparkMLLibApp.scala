@@ -11,7 +11,7 @@ import org.apache.spark.SparkContext
  *
  * Steps for running it:
  * mvn package
- * spark-submit --class ${groupId}.${artifactId}.SparkApp ${artifactId}-${version}-jar-with-dependencies.jar
+ * spark-submit --class ${groupId}.${artifactId}.SparkMLLibApp ${artifactId}-${version}-jar-with-dependencies.jar
  *
  * @author ${user.name}
  */
