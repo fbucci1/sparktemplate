@@ -1,23 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>elgrupo</groupId>
-	<artifactId>elartefacto-inttest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<parent>
+		<groupId>elgrupo</groupId>
+		<artifactId>elartefacto_parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>elartefacto_inttest</artifactId>
 	<packaging>jar</packaging>
 	<name>Project ${project.artifactId}</name>
 	<description>Description for ${project.artifactId} ...</description>
-
-	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<encoding>UTF-8</encoding>
-		<spark.version>2.2.0</spark.version>
-		<!-- Spark 2.2.0 uses Scala 2.11 -->
-		<scala.major.version>2.11</scala.major.version>
-		<scala.version>${scala.major.version}.8</scala.version>
-	</properties>
 
 	<dependencies>
 		<!-- Project to test -->
@@ -26,36 +18,15 @@
 			<artifactId>elartefacto</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- Scala -->
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
-		<!-- Spark -->
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-core_${scala.major.version}</artifactId>
-			<version>${spark.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-mllib_${scala.major.version}</artifactId>
-			<version>${spark.version}</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.scalatest</groupId>
 			<artifactId>scalatest_${scala.major.version}</artifactId>
-			<version>2.2.4</version>
 		</dependency>
 	</dependencies>
 
@@ -85,7 +56,6 @@
 			<plugin>
 				<groupId>org.scala-tools</groupId>
 				<artifactId>maven-scala-plugin</artifactId>
-				<version>2.15.2</version>
 				<executions>
 					<execution>
 						<goals>
@@ -98,7 +68,6 @@
 			<plugin>
 				<groupId>org.scalatest</groupId>
 				<artifactId>scalatest-maven-plugin</artifactId>
-				<version>1.0</version>
 				<configuration>
 					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
 					<junitxml>.</junitxml>
@@ -116,7 +85,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
@@ -124,7 +92,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
 				<executions>
 					<execution>
 						<phase>deploy</phase>
@@ -143,7 +110,7 @@
 								</scp>
 								<sshexec host="${scp.host}" username="${scp.user}" trust="true"
 									password="${scp.password}" failonerror="true" verbose="false"
-									command="/usr/local/mybigdata/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class ${project.groupId}.${project.artifactId}.TestSuite ${scp.dirCopyTo}/${project.artifactId}-${project.version}-jar-with-dependencies.jar" />
+									command="/usr/local/mybigdata/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class ${project.groupId}.${project.artifactId}.TestRunner ${scp.dirCopyTo}/${project.artifactId}-${project.version}-jar-with-dependencies.jar" />
 							</target>
 						</configuration>
 					</execution>
@@ -162,49 +129,5 @@
 				</dependencies>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.scala-tools
-										</groupId>
-										<artifactId>
-											maven-scala-plugin
-										</artifactId>
-										<versionRange>
-											[2.15.2,)
-										</versionRange>
-										<goals>
-											<goal>compile</goal>
-											<goal>testCompile</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore/>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>scala-tools.org</id>
-			<name>Scala-tools Maven2 Repository</name>
-			<url>http://scala-tools.org/repo-releases</url>
-		</pluginRepository>
-	</pluginRepositories>
 </project>

@@ -6,7 +6,7 @@ import org.junit.Test
 import org.scalatest.Assertions
 import elgrupo.elartefacto.SparkApp
 
-class TestCases extends Assertions {
+class IntTestCases extends Assertions {
 
   @Test def callApp() { 
     SparkApp.main((Array[String]){"someParameter!"});

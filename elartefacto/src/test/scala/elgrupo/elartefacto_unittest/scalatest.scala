@@ -6,7 +6,7 @@ import org.junit.Test
 import org.scalatest.Assertions
 import elgrupo.elartefacto.SparkApp
 
-class TestCases extends Assertions { 
+class UnitTestCases extends Assertions { 
 
   @Test def stackShouldPopValuesIinLastInFirstOutOrder() {
     val stack = new Stack[Int]

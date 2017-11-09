@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>elgrupo</groupId>
-	<artifactId>elartefacto-parent</artifactId>
+	<artifactId>elartefacto_parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Project ${project.artifactId}</name>
@@ -10,7 +10,127 @@
 
 	<modules>
 		<module>elartefacto</module>
-		<module>elartefacto-inttest</module>
+		<module>elartefacto_inttest</module>
 	</modules>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<encoding>UTF-8</encoding>
+		<spark.version>2.2.0</spark.version>
+		<!-- Spark 2.2.0 uses Scala 2.11 -->
+		<scala.major.version>2.11</scala.major.version>
+		<scala.version>${scala.major.version}.8</scala.version>
+	</properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.8</version>
+				</plugin>
+				<plugin>
+					<groupId>org.scala-tools</groupId>
+					<artifactId>maven-scala-plugin</artifactId>
+					<version>2.15.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.scalatest</groupId>
+					<artifactId>scalatest-maven-plugin</artifactId>
+					<version>1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.7</version>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.scala-tools
+										</groupId>
+										<artifactId>
+											maven-scala-plugin
+										</artifactId>
+										<versionRange>
+											[2.15.2,)
+										</versionRange>
+										<goals>
+											<goal>compile</goal>
+											<goal>testCompile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore/>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<dependencyManagement>
+		<dependencies>
+			<!-- Scala -->
+			<dependency>
+				<groupId>org.scala-lang</groupId>
+				<artifactId>scala-library</artifactId>
+				<version>${scala.version}</version>
+			</dependency>
+			<!-- Spark -->
+			<dependency>
+				<groupId>org.apache.spark</groupId>
+				<artifactId>spark-core_${scala.major.version}</artifactId>
+				<version>${spark.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.spark</groupId>
+				<artifactId>spark-mllib_${scala.major.version}</artifactId>
+				<version>${spark.version}</version>
+			</dependency>
+
+			<!-- Test -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+			</dependency>
+			<dependency>
+				<groupId>org.scalatest</groupId>
+				<artifactId>scalatest_${scala.major.version}</artifactId>
+				<version>2.2.4</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>
