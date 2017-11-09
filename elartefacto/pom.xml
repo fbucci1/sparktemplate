@@ -11,14 +11,10 @@
 	<description>Description for ${project.artifactId} ...</description>
 
 <!-- 
-Improvements: 
+TO DO Improvements: 
 1. Use encrypted passwords in settings.xml file:
 	https://maven.apache.org/guides/mini/guide-encryption.html
 	https://stackoverflow.com/questions/11418268/decrypting-server-entries-in-custom-maven-plugin
-2. Deploy in proper phase and run integration tests in the development server:
-	https://github.com/abhitechdojo/maven-scala-spark
-	https://stackoverflow.com/questions/36640285/automated-integration-testing-for-a-spark-job
-	https://stackoverflow.com/questions/3321091/what-is-the-correct-maven2-phase-for-deployment-into-application-server
  -->
 	<dependencies>
 		<!-- Scala -->
@@ -86,6 +82,24 @@ Improvements:
 					</execution>
 				</executions>
 			</plugin>
+			<!--  Following settings are needed in .m2/settings.xml file:
+			<settings...>
+				<profiles>
+					<profile>
+						<id>default</id>
+						<activation>
+							<activeByDefault>true</activeByDefault>
+						</activation>
+						<properties>
+							<scp.host>theIP</scp.host>
+							<scp.user>theUsername</scp.user>
+							<scp.password>thePassword</scp.password>
+							<scp.dirCopyTo>/tmp</scp.dirCopyTo>
+						</properties>
+					</profile>
+				</profiles>
+			</settings>
+			-->
 			<plugin>
 				<groupId>org.scalatest</groupId>
 				<artifactId>scalatest-maven-plugin</artifactId>
