@@ -12,6 +12,10 @@ Improvements:
 1. Use encrypted passwords in settings.xml file:
 	https://maven.apache.org/guides/mini/guide-encryption.html
 	https://stackoverflow.com/questions/11418268/decrypting-server-entries-in-custom-maven-plugin
+2. Deploy in proper phase and run integration tests in the development server:
+	https://github.com/abhitechdojo/maven-scala-spark
+	https://stackoverflow.com/questions/36640285/automated-integration-testing-for-a-spark-job
+	https://stackoverflow.com/questions/3321091/what-is-the-correct-maven2-phase-for-deployment-into-application-server
  -->
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -43,16 +47,6 @@ Improvements:
 			<version>${spark.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.spark</groupId> <artifactId>spark-streaming_${scala.major.version}</artifactId> 
-			<version>${spark.version}</version> <scope>provided</scope> </dependency> 
-			<dependency> <groupId>org.apache.spark</groupId> <artifactId>spark-sql_${scala.major.version}</artifactId> 
-			<version>${spark.version}</version> <scope>provided</scope> </dependency> 
-			<dependency> <groupId>org.apache.spark</groupId> <artifactId>spark-hive_${scala.major.version}</artifactId> 
-			<version>${spark.version}</version> <scope>provided</scope> </dependency> 
-			<dependency> <groupId>org.apache.spark</groupId> <artifactId>spark-streaming-kafka-0-10_2.11</artifactId> 
-			<version>${spark.version}</version> </dependency> <dependency> <groupId>com.databricks</groupId> 
-			<artifactId>spark-csv_${scala.major.version}</artifactId> <version>1.5.0</version> 
-			</dependency> -->
 
 		<!-- Test -->
 		<dependency>
@@ -130,46 +124,6 @@ Improvements:
 				<configuration>
 					<skip>true</skip>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<phase>deploy</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target unless="maven.deploy.skip">
-								<echo
-									message="Deploying jar file to development server ${scp.host}:/${scp.dirCopyTo}" />
-								<scp todir="${scp.user}:${scp.password}@${scp.host}:/${scp.dirCopyTo}"
-									trust="true" failonerror="true" verbose="false">
-									<fileset dir="target">
-										<include name="*-jar-with-dependencies.jar" />
-									</fileset>
-								</scp>
-								<sshexec host="${scp.host}" username="${scp.user}" trust="true"
-									password="${scp.password}" failonerror="true" verbose="false"
-									command="/usr/local/mybigdata/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class ${project.groupId}.${project.artifactId}.SparkApp ${scp.dirCopyTo}/${project.artifactId}-${project.version}-jar-with-dependencies.jar" />
-							</target>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.ant</groupId>
-						<artifactId>ant-jsch</artifactId>
-						<version>1.10.1</version>
-					</dependency>
-					<dependency>
-						<groupId>com.jcraft</groupId>
-						<artifactId>jsch</artifactId>
-						<version>0.1.54</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 		<pluginManagement>

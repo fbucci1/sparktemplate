@@ -1,11 +1,16 @@
-package elgrupo.elartefacto.tests
+package elgrupo.elartefacto_inttest
 
 import scala.collection.mutable.Stack
 
 import org.junit.Test
 import org.scalatest.Assertions
+import elgrupo.elartefacto.SparkApp
 
-class StackSuite extends Assertions {
+class TestCases extends Assertions {
+
+  @Test def callApp() { 
+    SparkApp.main((Array[String]){"someParameter!"});
+  }
 
   @Test def stackShouldPopValuesIinLastInFirstOutOrder() {
     val stack = new Stack[Int]

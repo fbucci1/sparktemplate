@@ -1,3 +1,8 @@
-/borrar/target
-/borrar/.cache-tests
-/borrar/.cache-main
+/elartefacto/target
+/elartefacto/.cache-tests
+/elartefacto/.cache-main
+/elartefacto-inttest/target
+/elartefacto-inttest/.cache-tests
+/elartefacto-inttest/.cache-main
+/target/
+null
