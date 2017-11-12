@@ -7,3 +7,4 @@
 /target/
 null
 .cache-main
+/elartefacto/spark-warehouse

@@ -30,7 +30,8 @@ object DescriptiveStatisticsApp {
       Vectors.sparse(4, Seq((0, 9.0), (3, 1.0))))
 
     // create Spark context with Spark configuration
-    val sc = new SparkContext(new SparkConf().setAppName("Spark Count"))
+    // TODO .setMaster("local[*]") should only be set for unit testing
+    val sc = new SparkContext(new SparkConf().setAppName("Spark Count").setMaster("local[*]"))
 
     val sqlContext = new org.apache.spark.sql.SQLContext(sc)
     import sqlContext.implicits._ 

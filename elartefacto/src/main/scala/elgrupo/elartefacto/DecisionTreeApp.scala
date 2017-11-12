@@ -31,6 +31,7 @@ object DecisionTreeApp {
     println("Hello World MLLib Spark!")
 
     // create Spark context with Spark configuration
+    // TODO .setMaster("local[*]") should only be set for unit testing
     val sc = new SparkContext(new SparkConf().setAppName("Spark Sample App").setMaster("local[*]"));
 
     //Load and Parse the Data from a csv File
