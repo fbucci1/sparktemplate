@@ -4,7 +4,6 @@ import scala.collection.mutable.Stack
 
 import org.junit.Test
 import org.scalatest.Assertions
-import elgrupo.elartefacto.SparkApp
 
 class UnitTestCases extends Assertions { 
 

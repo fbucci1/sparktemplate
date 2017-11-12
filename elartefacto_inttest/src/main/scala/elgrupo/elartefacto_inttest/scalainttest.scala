@@ -4,12 +4,12 @@ import scala.collection.mutable.Stack
 
 import org.junit.Test
 import org.scalatest.Assertions
-import elgrupo.elartefacto.SparkApp
+import elgrupo.elartefacto.DescriptiveStatisticsApp
 
 class IntTestCases extends Assertions {
 
-  @Test def callApp() { 
-    SparkApp.main((Array[String]){"someParameter!"});
+  @Test def callApp() {
+    DescriptiveStatisticsApp.main((Array[String]) { "someParameter!" });
   }
 
   @Test def stackShouldPopValuesIinLastInFirstOutOrder() {
