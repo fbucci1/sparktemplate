@@ -111,6 +111,9 @@
 								<sshexec host="${scp.host}" username="${scp.user}" trust="true"
 									password="${scp.password}" failonerror="true" verbose="false"
 									command="/usr/local/mybigdata/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class ${project.groupId}.${project.artifactId}.TestRunner ${scp.dirCopyTo}/${project.artifactId}-${project.version}-jar-with-dependencies.jar" />
+								<sshexec host="${scp.host}" username="${scp.user}" trust="true"
+									password="${scp.password}" failonerror="true" verbose="false"
+									command="/usr/local/mybigdata/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --class ${project.groupId}.elartefacto.FlumeStreamingApp ${scp.dirCopyTo}/${project.artifactId}-${project.version}-jar-with-dependencies.jar" />
 							</target>
 						</configuration>
 					</execution>

@@ -10,12 +10,8 @@
 	<name>Project ${project.artifactId}</name>
 	<description>Description for ${project.artifactId} ...</description>
 
-<!-- 
-TO DO Improvements: 
-1. Use encrypted passwords in settings.xml file:
-	https://maven.apache.org/guides/mini/guide-encryption.html
-	https://stackoverflow.com/questions/11418268/decrypting-server-entries-in-custom-maven-plugin
- -->
+	<!-- TO DO Improvements: 1. Use encrypted passwords in settings.xml file: 
+		https://maven.apache.org/guides/mini/guide-encryption.html https://stackoverflow.com/questions/11418268/decrypting-server-entries-in-custom-maven-plugin -->
 	<dependencies>
 		<!-- Scala -->
 		<dependency>
@@ -31,6 +27,11 @@ TO DO Improvements:
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-mllib_${scala.major.version}</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-flume_${scala.major.version}</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
@@ -82,24 +83,11 @@ TO DO Improvements:
 					</execution>
 				</executions>
 			</plugin>
-			<!--  Following settings are needed in .m2/settings.xml file:
-			<settings...>
-				<profiles>
-					<profile>
-						<id>default</id>
-						<activation>
-							<activeByDefault>true</activeByDefault>
-						</activation>
-						<properties>
-							<scp.host>theIP</scp.host>
-							<scp.user>theUsername</scp.user>
-							<scp.password>thePassword</scp.password>
-							<scp.dirCopyTo>/tmp</scp.dirCopyTo>
-						</properties>
-					</profile>
-				</profiles>
-			</settings>
-			-->
+			<!-- Following settings are needed in .m2/settings.xml file: <settings...> 
+				<profiles> <profile> <id>default</id> <activation> <activeByDefault>true</activeByDefault> 
+				</activation> <properties> <scp.host>theIP</scp.host> <scp.user>theUsername</scp.user> 
+				<scp.password>thePassword</scp.password> <scp.dirCopyTo>/tmp</scp.dirCopyTo> 
+				</properties> </profile> </profiles> </settings> -->
 			<plugin>
 				<groupId>org.scalatest</groupId>
 				<artifactId>scalatest-maven-plugin</artifactId>

@@ -31,8 +31,8 @@ object DecisionTreeApp {
     println("Hello World MLLib Spark!")
 
     // create Spark context with Spark configuration
-    // TODO .setMaster("local[*]") should only be set for unit testing
-    val sc = new SparkContext(new SparkConf().setAppName("Spark Sample App").setMaster("local[*]"));
+    // TODO .setMaster("local[*]") should only be set for unit testing. Check this: You can set the Spark master from the command-line by adding the JVM parameter: -Dspark.master=spark://myhost:7077
+    val sc = new SparkContext(new SparkConf().setAppName("DecisionTreeApp").setMaster("local[*]"));
 
     //Load and Parse the Data from a csv File
     val textRDD = sc.textFile("data/rita2014jan.csv")
